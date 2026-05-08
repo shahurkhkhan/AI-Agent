@@ -18,32 +18,6 @@ services:
     ports:
       - "6379:6379"
       
-  # nestjs:
-  #   image: nestjs-image
-  #   container_name: nestjs-container
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   environment:
-  #     NODE_ENV: development
-  #     MONGO_URI: mongodb://admin:password@localhost:27017/ai-agent-db?authSource=admin
-  #     REDIS_HOST: redis
-  #     REDIS_PORT: 6379
-  #     OPENAI_API_KEY: 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
-  #     CHROMA_API_KEY: ck-Efodv93Zv2MzoJkG3uJqmDGKQkaTfxbv87Nw3pfAV8Fg
-  #     CHROMA_TENANT: 49aeca02-9521-49e6-ab08-1ff5642943eb
-  #     CHROMA_DATABASE: learn-ai-db
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - .:/app
-  #     - nestjs_data:/app/node_modules
-  #   command: npm run start:dev --poll=2000
-  #   depends_on:
-  #     - mongodb
-  #     - redis
-
 volumes:
   mongodb_data:
   postgres_data:
-  # nestjs_data:
