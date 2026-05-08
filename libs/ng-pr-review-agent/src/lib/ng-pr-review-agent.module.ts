@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import envConfig from './common/env.config';
 import { envValidationSchema } from './common/env.validation';
 import { AgentModule } from './agent/agent.module';
+import { PRReviewService } from './pr-review.service';
 
 
 @Module({
@@ -21,7 +22,9 @@ import { AgentModule } from './agent/agent.module';
   controllers: [
     PRReviewController
   ],
-  providers: [],
-  exports: [],
+  providers: [
+    PRReviewService
+  ],
+  exports: [PRReviewService],
 })
 export class NgPrReviewAgentModule {}

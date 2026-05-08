@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { AgentRuntimeService } from './agent/agent';
 
 @Controller('pr')
@@ -7,14 +7,9 @@ export class PRReviewController {
     private runtime: AgentRuntimeService,
   ) {}
 
-  @Get(':query')
-  todoAgent(
-    @Param('query') query: string,
-    // @Body() body: { query: string },
-  ) {
-    return this.runtime.invoke({
-        message: query,
-    });
+  @Get()
+  todoAgent() {
+    return this.runtime.invoke();
   }
 
 }

@@ -5,17 +5,19 @@ import { join } from 'path';
 
 import { LLMClient } from '../../common/llm.service';
 import { ToolRegistry } from '../tools/tool.registry';
-import { FILE, OLDComment, ReviewComment, ReviewCommentSchema, State } from '../state';
+import { FILE, ReviewComment, ReviewCommentSchema, State } from '../state';
 
 @Injectable()
 export class LLMNode {
-  private client = this.llMClient
-    .getClient(this.toolRegistry.getTools())
+  private client;
 
   constructor(
     private llMClient: LLMClient,
     private toolRegistry: ToolRegistry
-  ) { }
+  ) {
+    this.client = this.llMClient
+    .getClient(this.toolRegistry.getTools())
+  }
 
   private loadPrompt(file: string): string {
     const fullPath = join(

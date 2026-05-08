@@ -1,0 +1,28 @@
+{
+  "name": "pr-review-agent-runner",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/pr-review-agent-runner/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "webpack-cli build",
+        "args": ["--node-env=production"],
+        "cwd": "apps/pr-review-agent-runner"
+      },
+      "configurations": {
+        "development": {
+          "args": ["--node-env=development"]
+        }
+      }
+    },
+    "run": {
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "pr-review-agent-runner:build"
+      }
+    }
+  },
+  "tags": []
+}

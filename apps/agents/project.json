@@ -9,17 +9,23 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "webpack-cli build",
-        "args": ["--node-env=production"],
+        "args": [
+          "--node-env=production"
+        ],
         "cwd": "apps/agents"
       },
       "configurations": {
         "development": {
-          "args": ["--node-env=development"]
+          "args": [
+            "--node-env=development"
+          ]
         }
       }
     },
     "prune-lockfile": {
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "cache": true,
       "executor": "@nx/js:prune-lockfile",
       "outputs": [
@@ -31,7 +37,9 @@
       }
     },
     "copy-workspace-modules": {
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "cache": true,
       "outputs": [
         "{workspaceRoot}/dist/apps/agents/workspace_modules"
@@ -42,7 +50,10 @@
       }
     },
     "prune": {
-      "dependsOn": ["prune-lockfile", "copy-workspace-modules"],
+      "dependsOn": [
+        "prune-lockfile",
+        "copy-workspace-modules"
+      ],
       "executor": "nx:noop"
     },
     "serve": {
@@ -60,6 +71,12 @@
         "production": {
           "buildTarget": "agents:build:production"
         }
+      }
+    },
+    "run-pr-review": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx tsx --tsconfig tsconfig.base.json apps/agents/src/pr-review-agent.ts"
       }
     },
     "test": {
