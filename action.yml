@@ -12,7 +12,10 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: npm ci --omit=dev
+    - run: npm ci
+      shell: bash
+
+    - run: npx nx build pr-review-agent-runner
       shell: bash
 
     - run: node dist/apps/pr-review-agent-runner/main.js
