@@ -30,7 +30,7 @@ exports.AgentModule = AgentModule = tslib_1.__decorate([
             // Agent
             agent_1.AgentRuntimeService,
         ],
-        exports: [agent_1.AgentRuntimeService, llm_service_1.LLMClient]
+        exports: [agent_1.AgentRuntimeService]
     })
 ], AgentModule);
 //# sourceMappingURL=agent.module.js.map
