@@ -15,6 +15,12 @@ runs:
     - run: npm ci
       shell: bash
 
+    - run: npx nx show projects
+      shell: bash
+      
+    - run: npx nx reset
+      shell: bash
+
     - run: npx nx build pr-review-agent-runner
       shell: bash
 
