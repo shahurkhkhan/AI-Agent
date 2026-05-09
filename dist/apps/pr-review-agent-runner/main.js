@@ -16,7 +16,6 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppModule = void 0;
 const tslib_1 = __webpack_require__(3);
 const common_1 = __webpack_require__(4);
-// import { AppController } from './app.controller';
 const app_service_1 = __webpack_require__(5);
 const ng_pr_review_agent_1 = __webpack_require__(6);
 let AppModule = class AppModule {
@@ -25,7 +24,6 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = tslib_1.__decorate([
     (0, common_1.Module)({
         imports: [ng_pr_review_agent_1.NgPrReviewAgentModule],
-        // controllers: [AppController],
         providers: [app_service_1.AppService],
     })
 ], AppModule);
@@ -541,12 +539,8 @@ exports.githubClient = github.getOctokit(env_config_1.env.github_token);
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.env = void 0;
 exports.env = {
-    openai_api_key: process.env['OPENAI_API_KEY'] || (() => {
-        throw new Error("OPENAI_API_KEY is not defined");
-    })(),
-    github_token: process.env['GITHUB_TOKEN'] || (() => {
-        throw new Error("GITHUB_TOKEN is not defined");
-    })(),
+    openai_api_key: process.env['OPENAI_API_KEY'] ?? '',
+    github_token: process.env['GITHUB_TOKEN'] ?? '',
     github_action_path: process.env['GITHUB_ACTION_PATH'] ?? ''
 };
 exports["default"] = () => ({
@@ -770,7 +764,7 @@ exports.AgentModule = AgentModule = tslib_1.__decorate([
             // Agent
             agent_1.AgentRuntimeService,
         ],
-        exports: [agent_1.AgentRuntimeService, llm_service_1.LLMClient]
+        exports: [agent_1.AgentRuntimeService]
     })
 ], AgentModule);
 
@@ -791,7 +785,8 @@ let PRReviewService = class PRReviewService {
         this.runtime = runtime;
     }
     invoke() {
-        return 'Hello';
+        // return this.runtime.invoke();
+        return "ok";
     }
 };
 exports.PRReviewService = PRReviewService;
@@ -841,7 +836,7 @@ const app_service_1 = __webpack_require__(5);
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     const appService = app.get(app_service_1.AppService);
-    appService.run();
+    await appService.run();
     await app.close();
 }
 bootstrap();
