@@ -28,7 +28,7 @@ runs:
     #   working-directory: ${{ github.action_path }} 
 
     - name: Run action 
-      run: node dist/apps/pr-review-agent-runner/main.js 
+      run: node dist/main.js 
       shell: bash 
       working-directory: ${{ github.action_path }}
       env: 
