@@ -539,8 +539,12 @@ exports.githubClient = github.getOctokit(env_config_1.env.github_token);
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.env = void 0;
 exports.env = {
-    openai_api_key: process.env['OPENAI_API_KEY'] ?? '',
-    github_token: process.env['GITHUB_TOKEN'] ?? '',
+    openai_api_key: process.env['OPENAI_API_KEY'] || (() => {
+        throw new Error("OPENAI_API_KEY is not defined");
+    })(),
+    github_token: process.env['GITHUB_TOKEN'] || (() => {
+        throw new Error("GITHUB_TOKEN is not defined");
+    })(),
     github_action_path: process.env['GITHUB_ACTION_PATH'] ?? ''
 };
 exports["default"] = () => ({
@@ -785,8 +789,7 @@ let PRReviewService = class PRReviewService {
         this.runtime = runtime;
     }
     invoke() {
-        // return this.runtime.invoke();
-        return "ok";
+        return this.runtime.invoke();
     }
 };
 exports.PRReviewService = PRReviewService;
