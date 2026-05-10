@@ -9,8 +9,7 @@ let PRReviewService = class PRReviewService {
         this.runtime = runtime;
     }
     invoke() {
-        // return this.runtime.invoke();
-        return "ok";
+        return this.runtime.invoke();
     }
 };
 exports.PRReviewService = PRReviewService;
