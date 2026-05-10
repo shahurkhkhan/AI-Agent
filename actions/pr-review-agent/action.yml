@@ -17,10 +17,10 @@ runs:
       shell: bash 
       working-directory: ${{ github.action_path }}
 
-    # - name: Show projects 
-    #   run: npx nx show projects 
-    #   shell: bash 
-    #   working-directory: ${{ github.action_path }}
+    - name: Show projects 
+      run: npx nx show projects 
+      shell: bash 
+      working-directory: ${{ github.action_path }}
       
     # - name: Build action 
     #   run: npx nx build pr-review-agent-runner 
