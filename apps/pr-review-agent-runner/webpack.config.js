@@ -4,7 +4,7 @@ const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   output: {
-    path: join(__dirname, '../../dist/apps/pr-review-agent-runner'),
+    path: join(__dirname, '../../actions/pr-review-agent/dist'),
     clean: true,
     ...(process.env.NODE_ENV !== 'production' && {
       devtoolModuleFilenameTemplate: '[absolute-resource-path]',
@@ -21,10 +21,7 @@ module.exports = {
       optimization: false,
       outputHashing: 'none',
       generatePackageJson: true,
-      sourceMap: true,
-      bundle: true,
-        "thirdParty": true,
-    "generatePackageJson": true,
+      sourceMap: true
     }),
   ],
 };
