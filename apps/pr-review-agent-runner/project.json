@@ -11,7 +11,8 @@
         "args": [
           "--node-env=production"
         ],
-        "cwd": "apps/pr-review-agent-runner"
+        "cwd": "apps/pr-review-agent-runner",
+        "assets": [ { "input": "libs/ng-pr-review-agent/src/lib/agent/prompts", "glob": "**/*", "output": "prompts" } ]
       },
       "configurations": {
         "development": {
