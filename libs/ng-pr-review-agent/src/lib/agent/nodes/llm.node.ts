@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HumanMessage, SystemMessage } from '@langchain/core/messages';
 import { readFileSync } from 'fs';
-import { join, resolve } from 'path';
+import { join } from 'path';
 
 import { LLMClient } from '../../common/llm.service';
 import { ToolRegistry } from '../tools/tool.registry';

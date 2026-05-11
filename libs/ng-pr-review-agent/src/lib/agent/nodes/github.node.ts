@@ -51,9 +51,9 @@ export class GitHubNode {
         const context = github.context;
         const PR = context.payload.pull_request;
 
-        const owner = context?.repo.owner ?? 'shahurkhkhan';
-        const repo = context?.repo.repo ?? 's3bangles-manager';
-        const pullNumber = PR?.number ?? 21;
+        const owner = context?.repo.owner;
+        const repo = context?.repo.repo;
+        const pullNumber = PR?.number;
 
         const files = await this.getPullRequestFiles(
             owner,
