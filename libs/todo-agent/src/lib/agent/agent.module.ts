@@ -15,6 +15,7 @@ import { ToolRegistry } from "./tools/tool.registry";
 import { TodoRepository } from "../database/repositories/todo.repository";
 import { Todo, TodoSchema } from "../database/schemas/todo.schema";
 import { MongooseModule } from '@nestjs/mongoose';
+import { UpdateTodoTool } from "./tools/update-todo.tool";
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     ListTodoTool,
     SearchTodoTool,
     DeleteTodoTool,
+    UpdateTodoTool,
     ToolRegistry,
     // Graph
     ChatGraph,

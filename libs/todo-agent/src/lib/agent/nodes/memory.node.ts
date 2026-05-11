@@ -18,6 +18,10 @@ export class MemoryNode {
     };
 
     update = async (state: State) => {
+        if (state.error) {
+            return state;
+        }
+
         const stateMemory = state.memory;
         const messageToMemory = this.messageToMemory(state);
 
@@ -30,6 +34,8 @@ export class MemoryNode {
         await this.radisMemory.setSession(state.sessionId, memory);
 
         return { ...state, memory: memory };
+
+
     };
 
     messageToMemory = (state: State) => {

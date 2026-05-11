@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { HumanMessage, SystemMessage } from '@langchain/core/messages';
 import { readFileSync } from 'fs';
-import { join } from 'path';
+import { join, resolve } from 'path';
 
 import { LLMClient } from '../../common/llm.service';
 import { ToolRegistry } from '../tools/tool.registry';
@@ -16,17 +16,26 @@ export class LLMNode {
     private toolRegistry: ToolRegistry
   ) {
     this.client = this.llMClient
-    .getClient(this.toolRegistry.getTools())
+      .getClient(this.toolRegistry.getTools())
   }
 
   private loadPrompt(file: string): string {
-    const fullPath = join(
-      process.cwd(),
-      'libs/ng-pr-review-agent/src/lib/agent/prompts',
-      file
-    );
+    // const fullPath = join(
+    //   process.cwd(),
+    //   'libs/ng-pr-review-agent/src/lib/agent/prompts',
+    //   file
+    // );
 
-    return readFileSync(fullPath, 'utf8');
+    // return readFileSync(fullPath, 'utf8');
+    const root =
+      process.env['GITHUB_ACTION_PATH'] ??
+      resolve(__dirname, "..");
+
+    const fullPath = join(root, "prompts", file);
+
+    console.log("Prompt path:", fullPath);
+
+    return readFileSync(fullPath, "utf8");
   }
 
   private systemPrompt = (): string => {
@@ -55,9 +64,9 @@ export class LLMNode {
       const oldCommentOfTheFile = state.oldComments.filter((comment) => comment.path === file.filename);
 
       const existingComments = oldCommentOfTheFile.map((comment) => ({
-          path: comment.path,
-          line: comment.line
-        })) ?? [];
+        path: comment.path,
+        line: comment.line
+      })) ?? [];
 
       const existingLines = new Set(
         oldCommentOfTheFile.map((comment) => `${comment.path}:${comment.line}`)

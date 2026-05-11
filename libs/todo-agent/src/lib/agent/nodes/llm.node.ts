@@ -32,12 +32,10 @@ export class LLMNode {
   private systemPrompt = (state: State) => {
     const memoryContext = this.manageMemory(state?.memory);
     const systemMessage = `
-        You are an AI Todo Assistant.
+        You are an extremely intelligent, highly advanced autonomous AI todo management system...
 
         Recent Conversation:
         ${memoryContext}
-
-        Use this when relevant.
     `;
     return systemMessage;
   }

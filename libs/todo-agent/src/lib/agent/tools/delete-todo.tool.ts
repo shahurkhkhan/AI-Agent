@@ -11,15 +11,32 @@ export class DeleteTodoTool {
 
     public name = 'deleteTodo';
 
-    private description = `Delete todo by id.`;
+    private description = `
+        Delete a todo using its exact MongoDB ObjectId.
+
+        Rules:
+        - ID must be a valid MongoDB ObjectId
+        - Never use todo title as ID
+        - Never guess ID
+        - Resolve todo before deletion
+        `;
 
     private schema = z.object({
-        id: z.string(),
-    })
+        id: z
+            .string()
+            .regex(/^[a-f\d]{24}$/i, 'Invalid Mongo ObjectId'),
+    });
 
     private func = async ({ id }: { id: string }) => {
+        const todo = this.todoRepository.isValidMongoId(id);
+        console.log('todo', todo)
+
+        if (!todo) {
+            return `Todo Id is not valid`;
+        }
+
         return this.todoRepository.deleteTodo(id);
-    }
+    };
 
     getTool() {
         return new DynamicStructuredTool({

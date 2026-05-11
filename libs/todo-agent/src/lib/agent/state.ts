@@ -8,6 +8,7 @@ export const AgentState = new StateSchema({
   messages: MessagesValue, // Prebuilt messages value with built-in reducer
   memory: z.array(z.object()).default([]),
   sessionId: z.string(),
+  error: z.string(),
 });
 
 export type State = typeof AgentState.State; // Full state type

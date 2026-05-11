@@ -1,0 +1,56 @@
+import { LLMNode } from './nodes/llm.node';
+import { MemoryNode } from './nodes/memory.node';
+import { ToolNode } from './nodes/tool.node';
+export declare class ChatGraph {
+    private llmNode;
+    private memoryNode;
+    private toolNode;
+    constructor(llmNode: LLMNode, memoryNode: MemoryNode, toolNode: ToolNode);
+    build(): import("@langchain/langgraph").CompiledStateGraph<{
+        messages: import("@langchain/core/messages").BaseMessage<import("@langchain/core/messages").MessageStructure<import("@langchain/core/messages").MessageToolSet>, import("@langchain/core/messages").MessageType>[];
+        memory: Record<string, never>[];
+        sessionId: string;
+        error: string;
+    }, {
+        messages?: import("@langchain/langgraph").Messages | import("@langchain/langgraph").OverwriteValue<import("@langchain/core/messages").BaseMessage<import("@langchain/core/messages").MessageStructure<import("@langchain/core/messages").MessageToolSet>, import("@langchain/core/messages").MessageType>[]> | undefined;
+        memory?: Record<string, never>[] | undefined;
+        sessionId?: string | undefined;
+        error?: string | undefined;
+    }, "__start__" | "memoryGet" | "llmNode" | "toolNode" | "memoryUpdate", import("@langchain/langgraph").StateSchema<{
+        messages: import("@langchain/langgraph").ReducedValue<import("@langchain/core/messages").BaseMessage<import("@langchain/core/messages").MessageStructure<import("@langchain/core/messages").MessageToolSet>, import("@langchain/core/messages").MessageType>[], import("@langchain/langgraph").Messages>;
+        memory: import("zod").ZodDefault<import("zod").ZodArray<import("zod").ZodObject<{}, import("zod/v4/core").$strip>>>;
+        sessionId: import("zod").ZodString;
+        error: import("zod").ZodString;
+    }>, import("@langchain/langgraph").StateSchema<{
+        messages: import("@langchain/langgraph").ReducedValue<import("@langchain/core/messages").BaseMessage<import("@langchain/core/messages").MessageStructure<import("@langchain/core/messages").MessageToolSet>, import("@langchain/core/messages").MessageType>[], import("@langchain/langgraph").Messages>;
+        memory: import("zod").ZodDefault<import("zod").ZodArray<import("zod").ZodObject<{}, import("zod/v4/core").$strip>>>;
+        sessionId: import("zod").ZodString;
+        error: import("zod").ZodString;
+    }>, import("@langchain/langgraph").StateDefinition, {
+        memoryGet: import("@langchain/langgraph").UpdateType<import("@langchain/langgraph").StateSchemaFieldsToStateDefinition<{
+            messages: import("@langchain/langgraph").ReducedValue<import("@langchain/core/messages").BaseMessage<import("@langchain/core/messages").MessageStructure<import("@langchain/core/messages").MessageToolSet>, import("@langchain/core/messages").MessageType>[], import("@langchain/langgraph").Messages>;
+            memory: import("zod").ZodDefault<import("zod").ZodArray<import("zod").ZodObject<{}, import("zod/v4/core").$strip>>>;
+            sessionId: import("zod").ZodString;
+            error: import("zod").ZodString;
+        }>>;
+        llmNode: {
+            messages: import("@langchain/core/messages").BaseMessage<import("@langchain/core/messages").MessageStructure<import("@langchain/core/messages").MessageToolSet>, import("@langchain/core/messages").MessageType>[];
+            memory: Record<string, never>[];
+            sessionId: string;
+            error: string;
+        };
+        toolNode: {
+            error: any;
+            messages: import("@langchain/core/messages").BaseMessage<import("@langchain/core/messages").MessageStructure<import("@langchain/core/messages").MessageToolSet>, import("@langchain/core/messages").MessageType>[];
+            memory: Record<string, never>[];
+            sessionId: string;
+        };
+        memoryUpdate: import("@langchain/langgraph").UpdateType<import("@langchain/langgraph").StateSchemaFieldsToStateDefinition<{
+            messages: import("@langchain/langgraph").ReducedValue<import("@langchain/core/messages").BaseMessage<import("@langchain/core/messages").MessageStructure<import("@langchain/core/messages").MessageToolSet>, import("@langchain/core/messages").MessageType>[], import("@langchain/langgraph").Messages>;
+            memory: import("zod").ZodDefault<import("zod").ZodArray<import("zod").ZodObject<{}, import("zod/v4/core").$strip>>>;
+            sessionId: import("zod").ZodString;
+            error: import("zod").ZodString;
+        }>>;
+    }, unknown, unknown, []>;
+    private shouldContinue;
+}

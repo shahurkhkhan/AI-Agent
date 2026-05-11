@@ -3,6 +3,7 @@ import { CreateTodoTool } from './create-todo.tool';
 import { ListTodoTool } from './list-todo.tool';
 import { DeleteTodoTool } from './delete-todo.tool';
 import { SearchTodoTool } from './search-todo.tool';
+import { UpdateTodoTool } from './update-todo.tool';
 
 @Injectable()
 export class ToolRegistry {
@@ -11,6 +12,7 @@ export class ToolRegistry {
     private readonly listTodoTool: ListTodoTool,
     private readonly deleteTodoTool: DeleteTodoTool,
     private readonly searchTodoTool: SearchTodoTool,
+    private readonly updateTodoTool: UpdateTodoTool,
   ) {}
 
   getTools() {
@@ -19,6 +21,7 @@ export class ToolRegistry {
       this.listTodoTool.getTool(),
       this.deleteTodoTool.getTool(),
       this.searchTodoTool.getTool(),
+      this.updateTodoTool.getTool(),
     ];
   }
 
