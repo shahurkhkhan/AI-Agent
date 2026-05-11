@@ -53,7 +53,7 @@ export class GitHubNode {
 
         const owner = context?.repo.owner;
         const repo = context?.repo.repo;
-        const pullNumber = PR?.number;
+        const pullNumber = PR?.number as number;
 
         const files = await this.getPullRequestFiles(
             owner,
