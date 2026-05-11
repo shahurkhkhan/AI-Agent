@@ -13,7 +13,13 @@
         "tsConfig": "libs/ng-pr-review-agent/tsconfig.lib.json",
         "packageJson": "libs/ng-pr-review-agent/package.json",
         "main": "libs/ng-pr-review-agent/src/index.ts",
-        "assets": ["libs/ng-pr-review-agent/*.md"]
+        "assets": [
+          {
+              "input": "libs/ng-pr-review-agent/src/lib/agent/prompts",
+              "glob": "**/*.md",
+              "output": "src/lib/agent/prompts"
+            }
+        ]
       }
     }
   }

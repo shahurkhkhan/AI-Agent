@@ -20,22 +20,15 @@ export class LLMNode {
   }
 
   private loadPrompt(file: string): string {
-    // const fullPath = join(
-    //   process.cwd(),
-    //   'libs/ng-pr-review-agent/src/lib/agent/prompts',
-    //   file
-    // );
+     const fullPath = join(
+      __dirname,
+      '../../libs/ng-pr-review-agent/src/lib/agent/prompts',
+      file
+    );
 
-    // return readFileSync(fullPath, 'utf8');
-    const root =
-      process.env['GITHUB_ACTION_PATH'] ??
-      resolve(__dirname, "..");
+    console.log('fullPath:', fullPath);
 
-    const fullPath = join(root, "prompts", file);
-
-    console.log("Prompt path:", fullPath);
-
-    return readFileSync(fullPath, "utf8");
+    return readFileSync(fullPath, 'utf8');
   }
 
   private systemPrompt = (): string => {

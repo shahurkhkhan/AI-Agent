@@ -13,7 +13,7 @@
         "tsConfig": "libs/todo-agent/tsconfig.lib.json",
         "packageJson": "libs/todo-agent/package.json",
         "main": "libs/todo-agent/src/index.ts",
-        "assets": ["libs/todo-agent/*.md"]
+        "assets": ["libs/todo-agent/**/*.md"]
       }
     }
   }

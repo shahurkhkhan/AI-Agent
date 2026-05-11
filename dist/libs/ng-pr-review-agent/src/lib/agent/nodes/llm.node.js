@@ -75,7 +75,8 @@ let LLMNode = class LLMNode {
             .getClient(this.toolRegistry.getTools());
     }
     loadPrompt(file) {
-        const fullPath = (0, path_1.join)(process.cwd(), 'libs/ng-pr-review-agent/src/lib/agent/prompts', file);
+        const fullPath = (0, path_1.join)(__dirname, 'prompts', file);
+        console.log('fullPath:', fullPath);
         return (0, fs_1.readFileSync)(fullPath, 'utf8');
     }
 };
