@@ -1,13 +1,44 @@
-FROM node:20-alpine
+# ==========================================
+# Stage 1: Build
+# ==========================================
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-COPY package*.json ./
+# Copy dependency files
+COPY package.json package-lock.json ./
+COPY nx.json tsconfig.base.json ./
 
-RUN npm ci --omit=dev
+# Install all dependencies
+RUN npm ci
 
-COPY dist ./dist/pr-review-agent-runner
+# Copy source code
+COPY . .
 
-EXPOSE 3000
+# Build both applications
+RUN npx nx build agents --configuration=production
 
-CMD ["node", "dist/pr-review-agent-runner/main.js"]
+# ==========================================
+# Stage 2: Runtime
+# ==========================================
+FROM node:22-alpine
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+COPY package.json package-lock.json ./
+COPY .env .env
+
+RUN npm ci --omit=dev && npm cache clean --force
+
+# Copy selected build output
+COPY --from=builder /app/dist/apps/agents ./dist/apps/agents
+
+# Security
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
+EXPOSE 80
+
+CMD ["sh", "-c", "node dist/apps/agents/main.js"]

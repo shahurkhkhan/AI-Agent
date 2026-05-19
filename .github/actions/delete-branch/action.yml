@@ -1,0 +1,33 @@
+name: Delete Branch
+description: >
+  Deletes the source branch after a PR is merged
+author: Shahrukh Khan
+
+
+inputs:
+  branch-name:
+    description: The name of the branch to delete
+    required: true
+
+runs: 
+  using: composite
+  steps: 
+    - name: Delete source branch
+      if: ${{ github.event.pull_request.merged == true &&
+        (startsWith(github.event.pull_request.head.ref, 'feature/') ||
+         startsWith(github.event.pull_request.head.ref, 'bugfix/')) }}
+      shell: bash
+      run: |
+        git fetch --prune
+
+        echo "Deleting branch: ${{ inputs.branch-name }}"
+
+        # Safety check
+        if [[ "${{ inputs.branch-name }}" == "main" || "${{ inputs.branch-name }}" == "develop" ]]; then
+          echo "❌ Protected branch. Skipping deletion."
+          exit 0
+        fi
+
+        git push origin --delete "${{ inputs.branch-name }}"
+
+        echo "✅ Branch deleted successfully"
