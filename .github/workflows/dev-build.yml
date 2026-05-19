@@ -82,6 +82,7 @@ jobs:
               with:
                 context: .
                 push: true
-                # build-args: |
-                #   APP_NAME=agents
+                build-args: |
+                  MONGO_URI=${{ secrets.MONGO_URI }} 
+                  OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
                 tags: ${{ steps.meta.outputs.tags }}
